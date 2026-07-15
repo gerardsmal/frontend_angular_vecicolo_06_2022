@@ -1,0 +1,37 @@
+<mat-toolbar>
+    <button matIconButton class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Veicoli market</span>
+    <span class="example-spacer"></span>
+       <button matIconButton class="example-icon" aria-label="Example icon-button with share icon" 
+       (click)="login()">
+        <mat-icon>login</mat-icon>
+    </button>
+<
+    <button matIconButton class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" [opened]="auth.grant().isMenu">
+        <mat-list role="list">
+            <mat-list-item role="listitem" routerLink="home" [routerLinkActive]="'active'">
+                Home</mat-list-item>
+            @if (auth.grant().isLogged){
+           <mat-list-item role="listitem" routerLink="carello" [routerLinkActive]="'active'">
+                Gestione carello</mat-list-item>
+            }
+            @if (auth.grant().isAdmin){
+            <mat-list-item role="listitem" routerLink="utente" [routerLinkActive]="'active'">
+                Gestione utente</mat-list-item>
+            <mat-list-item role="listitem" routerLink="veicoli" [routerLinkActive]="'active'">
+                Gestione veicoli</mat-list-item>
+
+            }
+        </mat-list></mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>
