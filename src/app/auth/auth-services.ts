@@ -7,7 +7,8 @@ export class AuthServices {
     grant = signal({
         isAdmin: false,
         isLogged: false,
-        isMenu:false
+        isMenu:false,
+        userId: null as string | null,
     })
 
     constructor() {
@@ -15,21 +16,25 @@ export class AuthServices {
             console.log("restore ----");
             const isLogged = localStorage.getItem("isLogged") == "1";
             const isAdmin = localStorage.getItem("isAdmin") == "1";
+             const userId = localStorage.getItem("userId");
             this.grant.set({
                 isAdmin,
                 isLogged,
-                isMenu:false
+                isMenu:false,
+                userId
             })
         }
     }
 
-    setAutentificated() {
+    setAutentificated(userId: any) {
         if (isPlatformBrowser(this.platformId)) {
             localStorage.setItem("isLogged", "1")
+            localStorage.setItem("userId", userId);
             this.grant.set({
                 isAdmin: false,
                 isLogged: true,
-                isMenu : true
+                isMenu : false,
+                userId
             })
         }
     }
@@ -39,7 +44,8 @@ export class AuthServices {
             localStorage.setItem("isAdmin", "1")
             this.grant.update(grant => ({
                 ...grant,     // copia tutte le proprieta di grant
-                isAdmin: true
+                isAdmin: true,
+                isMenu: true
             }));
         }
     }
@@ -59,10 +65,12 @@ export class AuthServices {
         if (isPlatformBrowser(this.platformId)) {
             localStorage.removeItem("isLogged")
             localStorage.removeItem("isAdmin")
+            localStorage.removeItem("userId")
             this.grant.set({
                 isAdmin: false,
                 isLogged: false,
-                isMenu : false
+                isMenu : false,
+                userId : null
             })
         }
     }

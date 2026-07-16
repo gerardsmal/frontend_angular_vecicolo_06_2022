@@ -1,8 +1,5 @@
 import { Routes } from '@angular/router';
 import { Dashboard } from './componenti/dashboard/dashboard';
-import { Login } from './componenti/login/login';
-import { Register } from './componenti/register/register';
-import { Component } from '@angular/core';
 import { Home } from './componenti/home/home';
 import { GestioneUtente } from './componenti/gestione-utente/gestione-utente';
 import { GestioneVeicoli } from './componenti/gestione-veicoli/gestione-veicoli';
@@ -20,8 +17,5 @@ export const routes: Routes = [
             { path: 'veicoli', component: GestioneVeicoli , canActivate:[autentificateGuard, adminGuard]},
         ]
     },
-    { path: 'login', component: Login },
-    { path: 'register', component: Register },
-
 
 ];
