@@ -1,6 +1,5 @@
 .example-container {
-  min-height: 600px;
-  height: auto;
+  min-height: 90vh;
   margin: 10px;
   border: 1px solid #555;
   background: #eee;
@@ -10,4 +9,7 @@
 }
 .example-spacer {
   flex: 1 1 auto;
+}
+.side-menu {
+  width: 200px; 
 }

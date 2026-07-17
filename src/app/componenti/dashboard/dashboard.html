@@ -28,7 +28,7 @@
 </mat-toolbar>
 
 <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" [opened]="auth.grant().isMenu">
+    <mat-drawer mode="side" [opened]="auth.grant().isMenu" class="side-menu">
         <mat-list role="list">
             <mat-list-item role="listitem" routerLink="home" [routerLinkActive]="'active'">
                 Home</mat-list-item>

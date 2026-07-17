@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { RouterLink, RouterOutlet, RouterLinkActive, Router } from "@angular/router";
@@ -8,9 +8,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthServices } from '../../auth/auth-services';
 import { UtilitiesServices } from '../../services/utilities-services';
 import { Login } from '../../dialogs/login/login';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { UtenteServices } from '../../services/utente-services';
 import { Registrazione } from '../../dialogs/registrazione/registrazione';
+import { ChangePassword } from '../../dialogs/change-password/change-password';
 @Component({
   selector: 'app-dashboard',
   imports: [MatSidenavModule, MatListModule, RouterLink, RouterOutlet, RouterLinkActive, MatIconModule,
@@ -21,12 +22,12 @@ import { Registrazione } from '../../dialogs/registrazione/registrazione';
 })
 export class Dashboard {
 
-  constructor(
-    public auth: AuthServices,
-    private rounting: Router,
-    private util: UtilitiesServices,
-    private utenteServices:UtenteServices
-  ) {}
+  public auth = inject(AuthServices);
+  private rounting = inject(Router);
+  private util = inject(UtilitiesServices);
+  private utenteServices = inject(UtenteServices);
+
+  constructor() { }
 
   login() {
     this.util.openDialog(Login,
@@ -38,10 +39,17 @@ export class Dashboard {
     )
   }
 
-  changePWD(){
+  changePWD() {
+    this.util.openDialog(ChangePassword,
+      {},
+      {
+        width: '400px',
+        disableClose: false,
+      }
+    )
   }
 
- profile() {
+  profile() {
     this.utenteServices.findByUserName(this.auth.grant().userId)
       .subscribe({
         next: ((r: any) => {

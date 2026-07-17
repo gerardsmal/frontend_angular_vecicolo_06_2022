@@ -1,0 +1,120 @@
+@if (mod() == 'U') {
+<h2 mat-dialog-title>Dettaglio {{ moto.modello }}</h2>
+} @else {
+<h2 mat-dialog-title>Creazione nuova moto</h2>
+}
+
+<button
+    mat-icon-button
+    mat-dialog-close
+    class="dialog-close-btn"
+    type="button">
+    <mat-icon>close</mat-icon>
+</button>
+
+<mat-dialog-content>
+
+    <form
+        [formGroup]="updateForm"
+        (ngSubmit)="onSubmit()"
+        class="form-container">
+
+        <div class="row-fields">
+            <mat-form-field appearance="fill" class="small-field">
+                <mat-label>Modello</mat-label>
+                <input matInput type="text" formControlName="modello">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="small-field">
+                <mat-label>Categoria</mat-label>
+                <mat-select formControlName="categ">
+                    @for (cat of categories(); track cat.id) {
+                    <mat-option [value]="cat.id">{{ cat.nome }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="small-field">
+                <mat-label>Tipo Alimentazione</mat-label>
+                <mat-select formControlName="alim">
+                    @for (al of tipoAlimentazione(); track al.id) {
+                    <mat-option [value]="al.id">{{ al.nome }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="small-field">
+                <mat-label>Colore</mat-label>
+                <mat-select formControlName="colore">
+                    @for (col of coloreList; track col.id) {
+                    <mat-option [value]="col.id">{{ col.nome }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row-fields">
+            <mat-form-field appearance="fill" class="small-field">
+                <mat-label>Marca</mat-label>
+                <mat-select formControlName="marca">
+                    @for (mar of marcaList; track mar.id) {
+                    <mat-option [value]="mar.id">{{ mar.nome }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="small-field">
+                <mat-label>Numero ruote</mat-label>
+                <input matInput type="number" formControlName="ruote">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="small-field">
+                <mat-label>Targa</mat-label>
+                <input matInput type="text" formControlName="targa">
+            </mat-form-field>
+        </div>
+
+        <div class="row-fields">
+            <mat-form-field appearance="fill" class="small-field">
+                <mat-label>Anno produzione</mat-label>
+                <input matInput type="number" formControlName="anno">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="small-field">
+                <mat-label>Numero marce</mat-label>
+                <input matInput type="number" formControlName="marce">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="small-field">
+                <mat-label>Prezzo</mat-label>
+                <input matInput type="number" formControlName="prezzo">
+            </mat-form-field>
+        </div>
+
+        <div class="msg-error">
+            <span style="color:red">{{ msg() }}</span>
+        </div>
+
+        <div class="button-group">
+            <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="updateForm.invalid">
+                Registrazione
+            </button>
+
+            @if (mod() == 'U') {
+            <button
+                mat-raised-button
+                color="warn"
+                type="button"
+                (click)="remove()">
+                Cancellazione
+            </button>
+            }
+        </div>
+
+    </form>
+
+</mat-dialog-content>

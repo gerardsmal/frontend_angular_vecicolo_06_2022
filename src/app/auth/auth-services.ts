@@ -20,7 +20,7 @@ export class AuthServices {
             this.grant.set({
                 isAdmin,
                 isLogged,
-                isMenu:false,
+                isMenu:isAdmin,
                 userId
             })
         }

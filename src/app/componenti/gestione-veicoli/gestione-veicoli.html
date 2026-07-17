@@ -1,1 +1,134 @@
-<p>gestione-veicoli works!</p>
+
+<div class="container">
+    <mat-card class="example-card" appearance="outlined">
+        <mat-card-header class="header-row">
+            <mat-card-title>Elenco Veicoli</mat-card-title>
+            <mat-form-field>
+                    <mat-label>Create veicolo</mat-label>
+                    <mat-select name="create"
+                            [(ngModel)]="tipoCreate"
+                            (selectionChange)="onCreateVeicolo()">
+                        @for (tipoV of tipoVeicoli; track tipoV.id) {
+                            <mat-option [value]="tipoV">{{ tipoV.nome }}</mat-option>
+                        }
+
+                    </mat-select>
+                </mat-form-field>
+            <!-- <button mat-raised-button color="primary" >Creazione nuovo Veicolo</button> -->
+        </mat-card-header>    
+        <mat-divider style="margin-top: 20px;"></mat-divider>
+        <mat-card-content>
+            <div class="search-row">
+                <mat-form-field>
+                    <mat-label>Tipo</mat-label>
+                    <mat-select name="tipo"
+                            [(ngModel)]="tipo"
+                            (selectionChange)="onTipoChange($event.value)">
+
+                    @for (tipoV of tipoVeicoli; track tipoV.id) {
+                        <mat-option [value]="tipoV">{{ tipoV.nome }}</mat-option>
+                    }
+
+                    </mat-select>
+                    @if (tipo){
+                    <button mat-icon-button matSuffix (click)="tipo = null; search()" matTooltip="Cancella">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    }
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Categoria</mat-label>
+                    <mat-select name='categ' [(ngModel)]="categ" [disabled]="!tipo"
+                                (selectionChange)="search()">
+                        @for (cat of categories; track cat.id ){
+                        <mat-option value={{cat.id}}>{{cat.nome}}</mat-option>
+                        }
+
+                    </mat-select>
+                    @if (categ){
+                    <button mat-icon-button matSuffix (click)="categ = null; search()" matTooltip="Cancella">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    }
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Tipo Alimentazione</mat-label>
+                    <mat-select name='alim' [(ngModel)]="alim" [disabled]="!tipo" 
+                            (selectionChange)="search()">
+                        @for (al of alimentazione; track al.id ){
+                        <mat-option value={{al.id}}>{{al.nome}}</mat-option>
+                        }
+
+                    </mat-select>
+                    @if (categ){
+                    <button mat-icon-button matSuffix (click)="alim = null; search()" matTooltip="Cancella">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    }
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Colore</mat-label>
+                    <mat-select name="colore"
+                            [(ngModel)]="colore" (selectionChange)="search()">
+                    @for (col of coloreList; track col.id) {
+                        <mat-option [value]="col.id">{{ col.nome }}</mat-option>
+                    }
+
+                    </mat-select>
+                    @if (colore){
+                    <button mat-icon-button matSuffix (click)="colore = null; search()  " matTooltip="Cancella">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    }
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Marca</mat-label>
+                    <mat-select name="marca"
+                            [(ngModel)]="marca" (selectionChange)="search()">
+                    @for (mar of marcaList; track mar.id) {
+                        <mat-option [value]="mar.id">{{ mar.nome }}</mat-option>
+                    }
+
+                    </mat-select>
+                    @if (marca){
+                    <button mat-icon-button matSuffix (click)="marca = null; search()" matTooltip="Cancella">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    }
+                </mat-form-field>
+            </div>
+                 <table class="table table-stripped ">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Tipo</th>
+                            <th>Modello</th>
+                            <th>Marca</th>
+                            <th>Prezzo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for (ve of veicoli; track ve.id) {
+                        <tr (click)="onSelected(ve)" class="clickable-row">
+                            <td>
+                            @if(ve.image){    
+                                <img [src]="ve.image" style="max-width: 80px;">
+                            } @else {
+                                <img src="no_image.png" style="max-width: 80px;">
+                            }
+                            </td>
+                            <td>{{ve.tipoVeicolo.nome}}</td>
+                            <td>{{ve.modello}}</td>
+                            <td>{{ve.marca.nome}}</td>
+                            <td>{{ve.prezzo}}</td>
+                        </tr>
+                    }   
+                    </tbody>
+                 </table>  
+        </mat-card-content>
+    </mat-card>
+</div>

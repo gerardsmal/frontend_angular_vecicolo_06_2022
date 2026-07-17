@@ -1,0 +1,122 @@
+/* ---------- FORM ---------- */
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.row-fields {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.small-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.small-field mat-form-field,
+mat-form-field.small-field {
+  width: 100%;
+}
+
+.msg-error {
+  min-height: 24px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 12px;
+}
+
+/* ---------- DIALOG ---------- */
+
+/* Dialog personalizzata */
+
+::ng-deep .wide-dialog .mat-mdc-dialog-container {
+  padding: 0 !important;
+}
+
+::ng-deep .wide-dialog .mat-mdc-dialog-surface {
+
+  position: relative;
+
+  width: 1100px !important;
+  max-width: 95vw !important;
+
+  height: auto !important;
+  max-height: 90vh !important;
+
+  padding: 20px !important;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* ---------- EXPANSION PANEL ---------- */
+
+mat-expansion-panel-header {
+  display: flex;
+  align-items: center;
+}
+
+mat-panel-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.panel-actions {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.panel-actions button {
+  margin-left: 8px;
+}
+
+/* ---------- IMMAGINI ---------- */
+
+.image-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.image-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.image-right {
+  flex: 1;
+}
+
+.file-name {
+  margin-left: 10px;
+}
+
+/* ---------- PULSANTE CHIUSURA ---------- */
+
+.dialog-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+
+  color: #555;
+}
+
+.dialog-close-btn:hover {
+  color: black;
+}
