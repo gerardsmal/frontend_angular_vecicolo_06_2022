@@ -50,7 +50,7 @@ export class Dashboard {
   }
 
   profile() {
-    this.utenteServices.findByUserName(this.auth.grant().userId)
+    this.utenteServices.findByUserName()
       .subscribe({
         next: ((r: any) => {
           this.util.openDialog(Registrazione,

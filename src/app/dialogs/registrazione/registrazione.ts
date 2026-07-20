@@ -68,7 +68,8 @@ if (data) {
   }
  onSubmitUpdate() {
     this.msg.set('');
-    const updateBody: any = { userName: this.account().userName };
+    //const updateBody: any = { userName: this.account().userName };
+    const updateBody: any = {};
 
     if (this.updateForm.controls['nome'].dirty)
       updateBody.nome = this.updateForm.value.nome;
@@ -96,7 +97,7 @@ if (data) {
 
     console.log(updateBody);
 
-    this.accoutServices.update(updateBody)
+    this.accoutServices.updateProfile(updateBody)
       .subscribe({
         next: ((resp: any) => {
           console.log(resp);

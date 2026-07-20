@@ -13,3 +13,14 @@
 .side-menu {
   width: 200px; 
 }
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.welcome {
+    margin-left: 20px;
+  font-weight: 500;
+}

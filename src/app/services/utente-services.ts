@@ -36,10 +36,15 @@ export class UtenteServices {
         return this.http.patch(this.getBaseUrl() + "user/update", body)
             .pipe(tap(() => this.list()));
     }
+   updateProfile(body: {}) {
+        return this.http.patch(this.getBaseUrl() + "user/update", body);
+    }
 
-    findByUserName(id: string) {
-        const params = new HttpParams().set("userName", id);
-        return this.http.get(this.getBaseUrl() + "user/getById", { params });
+    findByUserName(id?: string) {
+        
+        //const params = new HttpParams().set("userName", id);
+        //return this.http.get(this.getBaseUrl() + "user/getById", { params });
+        return this.http.get(this.getBaseUrl() + "user/getById");
     }
     changePwd(body: {}) {
         return this.http.put(this.getBaseUrl() + "user/changePwd", body);

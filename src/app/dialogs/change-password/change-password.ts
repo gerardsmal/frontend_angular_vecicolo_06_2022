@@ -34,7 +34,6 @@ onSubmit(updatePwd: NgForm) {
       return
     }
     this.accountServices.changePwd({
-      userName: this.auth.grant().userId,
       oldPwd: updatePwd.value.oldpassword,
       newPwd: updatePwd.value.newpassword
     }).subscribe({

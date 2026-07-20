@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { NgForm, FormsModule, NgModel } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialog, MatDialogContent, MatDialogRef , MatDialogClose} from '@angular/material/dialog';
+import { MatDialog, MatDialogContent, MatDialogRef, MatDialogClose } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,7 @@ import { AuthServices } from '../../auth/auth-services';
 import { Router } from '@angular/router';
 import { UtilitiesServices } from '../../services/utilities-services';
 import { Registrazione } from '../registrazione/registrazione';
+import { MeDTO } from '../../models/dto';
 
 
 @Component({
@@ -27,23 +28,22 @@ export class Login {
 
   constructor(
     private account: AutentificazioneServices,
-    private auth:AuthServices,
-    private routing:Router,
-    private util:UtilitiesServices,
+    private auth: AuthServices,
+    private routing: Router,
+    private util: UtilitiesServices,
     private dialogRef: MatDialogRef<Login>
-  ) {}
+  ) { }
 
-onSubmit(signin: NgForm) {
+  onSubmit(signin: NgForm) {
     this.account.login({
       userName: signin.form.value.userName,
       pwd: signin.form.value.password
     }).subscribe({
-      next: (resp: any) => {
+      next: (resp: MeDTO) => {
         this.msg.set("");
         console.log(resp)
-        this.auth.setAutentificated(resp.id);
-        if (resp.role == 'ADMIN') this.auth.setAdmin();
-        if (resp.role == 'USER') this.auth.setUser();
+
+        this.auth.setAutentificated(resp);
 
         console.log('[LoginDialog] dopo login, isAutentificated =', this.auth.isAutentificated());
 
@@ -54,18 +54,17 @@ onSubmit(signin: NgForm) {
       error: (resp: any) => {
         console.log(resp);
         this.msg.set(resp.error.msg);
+        this.userName = signin.form.value.userName;
       }
     });
-  
- 
   }
 
-  registrazione(){
-   this.util.openDialog(Registrazione,
+  registrazione() {
+    this.util.openDialog(Registrazione,
       {
         account: null,
         mode: "C"
-      }, 
+      },
       {
         width: '90vw',
         maxWidth: '1200px',
@@ -75,5 +74,5 @@ onSubmit(signin: NgForm) {
 
   }
 
-  onResendChange(e: MatCheckboxChange) {}
+  onResendChange(e: MatCheckboxChange) { }
 }

@@ -15,20 +15,30 @@
         </button>
     </mat-menu>
     }
-    <span>Veicoli market</span>
+   <span>Veicoli market</span>
+
+    @if (auth.grant().userId) {
+
+    <div class="user-info">
+        <span class="welcome">Ciao {{ auth.grant().userId }}</span>
+    </div>    
+    }
+
+ 
     <span class="example-spacer"></span>
        <button matIconButton class="example-icon" aria-label="Example icon-button with share icon" 
        (click)="login()">
         <mat-icon>login</mat-icon>
     </button>
-<
+
+ 
     <button matIconButton class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
         <mat-icon>logout</mat-icon>
     </button>
 </mat-toolbar>
 
 <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" [opened]="auth.grant().isMenu" class="side-menu">
+    <mat-drawer mode="side" [opened]="auth.grant().isAdmin" class="side-menu">
         <mat-list role="list">
             <mat-list-item role="listitem" routerLink="home" [routerLinkActive]="'active'">
                 Home</mat-list-item>

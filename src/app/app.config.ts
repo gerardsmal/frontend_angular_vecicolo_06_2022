@@ -3,8 +3,9 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { APP_SETTING } from './setting/token';
+import { authInterceptor } from './interceptors/authInterceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,7 +15,9 @@ export const appConfig: ApplicationConfig = {
         pageSize:4
       }
     },
-    provideHttpClient(),
+    provideHttpClient(
+       withInterceptors([authInterceptor])    // interceptor registration
+    ),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes), provideClientHydration()
   ]
