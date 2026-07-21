@@ -12,6 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UtenteServices } from '../../services/utente-services';
 import { Registrazione } from '../../dialogs/registrazione/registrazione';
 import { ChangePassword } from '../../dialogs/change-password/change-password';
+import { AutentificazioneServices } from '../../security/autentificazione-services';
 @Component({
   selector: 'app-dashboard',
   imports: [MatSidenavModule, MatListModule, RouterLink, RouterOutlet, RouterLinkActive, MatIconModule,
@@ -22,10 +23,11 @@ import { ChangePassword } from '../../dialogs/change-password/change-password';
 })
 export class Dashboard {
 
-  public auth = inject(AuthServices);
-  private rounting = inject(Router);
-  private util = inject(UtilitiesServices);
-  private utenteServices = inject(UtenteServices);
+  public readonly auth = inject(AuthServices);
+  private readonly rounting = inject(Router);
+  private readonly util = inject(UtilitiesServices);
+  private readonly utenteServices = inject(UtenteServices);
+  private readonly autentificazioneServices = inject(AutentificazioneServices);
 
   constructor() { }
 
@@ -73,6 +75,12 @@ export class Dashboard {
   logout() {
     console.log("logout");
     this.auth.resetAll();
-    this.rounting.navigate(['/dash'])
+    this.autentificazioneServices.logout()
+      .subscribe({
+        next: () => {
+          this.rounting.navigate(['/dash'])
+        }
+      })
+
   }
 }

@@ -1,9 +1,11 @@
 import { isPlatformBrowser } from '@angular/common';
 import { inject, PLATFORM_ID, Service, signal } from '@angular/core';
 import { MeDTO } from '../models/dto';
+import { AutentificazioneServices } from '../security/autentificazione-services';
 
 @Service()
 export class AuthServices {
+
     grant = signal({
         token: null,
         isAdmin: false,
@@ -14,10 +16,7 @@ export class AuthServices {
     setToken(token: string) {
         this.grant.update(grant => ({
             ...grant,     // copia tutte le proprieta di grant
-            token: token,
-            isAdmin: false,
-            isLogged: false,
-            userId: null
+            token: token
         }));
 
     }
