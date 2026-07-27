@@ -10,9 +10,19 @@ export class VeicoliServices {
     private readonly http = inject(HttpClient);
 
     veicoli = signal<any[]>([]);
+    paging = signal({
+        page: 0,
+        size: 0,
+        totalPages: 0,
+        totalElements: 0
+    });
 
     getBaseUrl(): string {
         return this.settings.apiUrl + 'veicolo/';
+    }
+
+    getPageSize(): number {
+        return this.settings.pageSize;
     }
 
     list(tipo?: number, categoria?: string, alimentazione?: string, colore?: number, marca?: number) {
@@ -28,5 +38,30 @@ export class VeicoliServices {
             })
     }
 
-  
+    page(page?: number, size?: number, sortBy?: string, direction?: string, tipo?: number, categoria?: string, alimentazione?: string, colore?: number, marca?: number) {
+        let params = new HttpParams();
+        params = params.set('page', page ?? 0);  // nullish coalescing -> se non é null o undefined
+        params = params.set('size', size ?? this.getPageSize());
+        params = params.set('sortBy', sortBy ?? 'prezzo');
+        params = params.set('direction', direction ?? 'DESC');
+
+        if (tipo) params = params.set('tipo', tipo);
+        if (categoria) params = params.set('categoria', categoria);
+        if (alimentazione) params = params.set('alimentazione', alimentazione);
+        if (colore) params = params.set('colore', colore);
+        if (marca) params = params.set('marca', marca);
+        
+        this.http.get(this.getBaseUrl() + "public/page", { params })
+            .subscribe({
+                next: ((r: any) => {
+                    this.veicoli.set(r.content)
+                    this.paging.set({
+                        page: r.page,
+                        size: r.size,
+                        totalPages: r.totalPages,
+                        totalElements: r.totalElements
+                    });
+                })
+            })
+    }
 }

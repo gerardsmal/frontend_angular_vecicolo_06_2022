@@ -1,1 +1,134 @@
-<p>home works!</p>
+<div class="container">
+    <mat-card class="example-card" appearance="outlined">
+        <mat-card-header class="header-row">
+            <mat-card-title>Veicoli in vendita</mat-card-title>
+        </mat-card-header>
+        <mat-divider style="margin-top: 20px;"></mat-divider>
+        <div class="search-row">
+            <mat-form-field>
+                <mat-label>Tipo</mat-label>
+                <mat-select name="tipo" [(ngModel)]="tipo" (selectionChange)="onTipoChange($event.value)">
+
+                    @for (tipoV of tipoVeicoli; track tipoV.id) {
+                    <mat-option [value]="tipoV">{{ tipoV.nome }}</mat-option>
+                    }
+
+                </mat-select>
+                @if (tipo){
+                <button mat-icon-button matSuffix (click)="tipo = null; search()" matTooltip="Cancella">
+                    <mat-icon>close</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Categoria</mat-label>
+                <mat-select name='categ' [(ngModel)]="categ" [disabled]="!tipo" (selectionChange)="search()">
+                    @for (cat of categories; track cat.id ){
+                    <mat-option value={{cat.id}}>{{cat.nome}}</mat-option>
+                    }
+
+                </mat-select>
+                @if (categ){
+                <button mat-icon-button matSuffix (click)="categ = null; search()" matTooltip="Cancella">
+                    <mat-icon>close</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Tipo Alimentazione</mat-label>
+                <mat-select name='alim' [(ngModel)]="alim" [disabled]="!tipo" (selectionChange)="search()">
+                    @for (al of alimentazione; track al.id ){
+                    <mat-option value={{al.id}}>{{al.nome}}</mat-option>
+                    }
+
+                </mat-select>
+                @if (alim){
+                <button mat-icon-button matSuffix (click)="alim = null; search()" matTooltip="Cancella">
+                    <mat-icon>close</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Colore</mat-label>
+                <mat-select name="colore" [(ngModel)]="colore" (selectionChange)="search()">
+                    @for (col of coloreList; track col.id) {
+                    <mat-option [value]="col.id">{{ col.nome }}</mat-option>
+                    }
+
+                </mat-select>
+                @if (colore){
+                <button mat-icon-button matSuffix (click)="colore = null; search()  " matTooltip="Cancella">
+                    <mat-icon>close</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Marca</mat-label>
+                <mat-select name="marca" [(ngModel)]="marca" (selectionChange)="search()">
+                    @for (mar of marcaList; track mar.id) {
+                    <mat-option [value]="mar.id">{{ mar.nome }}</mat-option>
+                    }
+
+                </mat-select>
+                @if (marca){
+                <button mat-icon-button matSuffix (click)="marca = null; search()" matTooltip="Cancella">
+                    <mat-icon>close</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+        </div>
+        <mat-divider style="margin-top: 20px;"></mat-divider>
+        <div class="products-grid">
+            @for (ve of veicoli; track ve.id) {
+            <mat-card class="product-card">
+                <mat-card-header class="header-center">
+                    <mat-card-title>{{ve.modello}}</mat-card-title>
+                    <mat-card-subtitle>{{ve.marca.nome}}</mat-card-subtitle>
+                </mat-card-header>
+
+                <div class="image-container" (click)="selectProd(ve)">
+                    @if (ve.image) {
+                    <img mat-card-image [src]="ve.image" alt="Veicolo">
+                    } @else {
+                    <img src="no_image.png" alt="No image">
+                    }
+                </div>
+
+                <mat-card-content>
+                    <p><span><strong>Prezzo. </strong>{{ve.prezzo | currency:'EUR'}}</span></p>
+                    <p><span><strong>Anno di produzione. </strong>{{ve.annoProduzione}}</span></p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                </mat-card-actions>
+            </mat-card>
+
+            }
+        </div>
+
+        <!--  paginazione -->
+        <div class="pager">
+            <button class="nav-btn" (click)="prevPage()" [disabled]="paging.page === 0">
+                ←
+            </button>
+
+            <div class="pager-info">
+                <span class="page-label">
+                    Pagina <strong>{{ paging.page + 1 }}</strong> / {{ paging.totalPages }}
+                </span>
+                <span class="total-label">
+                    {{ paging.totalElements }} risultati
+                </span>
+            </div>
+
+            <button class="nav-btn" (click)="nextPage()" [disabled]="paging.page >= paging.totalPages - 1">
+                →
+            </button>
+        </div>
+
+    </mat-card>
+</div>

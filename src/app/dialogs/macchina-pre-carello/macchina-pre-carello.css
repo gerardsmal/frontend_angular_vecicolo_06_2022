@@ -1,0 +1,42 @@
+.header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.header-center .mat-mdc-card-header-text {
+  text-align: center;
+  width: 100%;
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.image-container img {
+  max-width: 250px;    /* ← riduci qui la larghezza */
+  max-height: 250px;   /* ← evita immagini alte */
+  object-fit: contain; /* mantiene proporzioni perfette */
+}
+.dialog-container {
+  position: relative;
+  padding-top: 40px;  /* spazio per la X sopra la card */
+}
+.dialog-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #555;
+  z-index: 10;       /* 👈 importante per stare sopra alla mat-card */
+}
+mat-card-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  row-gap: 8px;
+}
+.dialog-close-btn:hover {
+  color: #000;
+}
