@@ -1,0 +1,122 @@
+.example-card {
+  width: 100%;
+}
+
+.example-card-footer {
+  padding: 16px;
+}
+.container {
+  display: flex;
+  justify-content: center;   /* CENTRA ORIZZONTALMENTE */
+  align-items: flex-start;   /* se vuoi centrare anche verticalmente: center */
+  padding: 20px;
+  width: 100%;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.spacer {
+    flex: 1 1 auto;
+}
+.clickable-row{    
+    cursor: pointer;
+}
+.rimuovi-td{
+    text-align: center;
+    width: 60px;
+}
+
+.clickable-row:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.qty-input {
+  width: 70px;
+  padding: 4px;
+  font-size: 14px;
+}
+
+/* Chrome: mostra le frecce */
+.qty-input::-webkit-inner-spin-button,
+.qty-input::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+/* Altezza uniforme per tutte le righe del carrello */
+.cart-row {
+  height: 90px; /* puoi aumentare/diminuire */
+}
+
+.cart-cell {
+  padding: 8px 10px;
+  vertical-align: middle;   /* centra in altezza rispetto alla riga */
+  /* niente display:flex qui */
+}
+
+
+/* Testo dentro celle standard */
+.cell-text {
+  width: 100%;
+  text-align: left;
+}
+
+/* Immagine del prodotto */
+.image-cell img {
+  max-height: 70px;
+  width: auto;
+  display: block;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.qty-btn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.qty-input {
+  width: 55px;
+  height: 32px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.delete-cell {
+  text-align: center;
+}
+.delete-btn {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+}
+
+/* opzionale: hover sulla riga */
+.cart-row:hover {
+  background-color: #f7f7f7;
+}
+.subtitle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.total-text {
+  margin-right: 12px;
+  font-weight: 500;
+}
+.order-btn {
+  margin-left: auto;   
+}

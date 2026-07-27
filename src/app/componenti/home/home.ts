@@ -13,6 +13,7 @@ import { VeicoliServices } from '../../services/veicoli-services';
 import { UtilitiesServices } from '../../services/utilities-services';
 import { ComponentType } from '@angular/cdk/overlay';
 import { MacchinaPreCarello } from '../../dialogs/macchina-pre-carello/macchina-pre-carello';
+import { MotoPreCarello } from '../../dialogs/moto-pre-carello/moto-pre-carello';
 @Component({
   selector: 'app-home',
   imports: [MatCardModule, MatDividerModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatSelectModule, MatIconModule,
@@ -113,7 +114,7 @@ export class Home implements OnInit {
   console.log("detaglio veicolo :" + vei.id);
     let dialogComponent: ComponentType<any>
     if (vei.tipoVeicolo.nome === 'macchina') dialogComponent = MacchinaPreCarello;
-   // if (vei.tipoVeicolo.nome === 'moto') dialogComponent = DettaglioMotoManager;
+    if (vei.tipoVeicolo.nome === 'moto') dialogComponent = MotoPreCarello;
    
 let dialogRef = this.util.openDialog(dialogComponent,
       {

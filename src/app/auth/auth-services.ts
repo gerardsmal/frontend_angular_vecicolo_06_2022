@@ -11,6 +11,7 @@ export class AuthServices {
         isAdmin: false,
         isLogged: false,
         userId: null as string | null,
+        carelloSize: null as number | null
     })
 
     setToken(token: string) {
@@ -29,6 +30,7 @@ export class AuthServices {
             isLogged: true,
             isAdmin: admin,
             userId: user.id,
+            carelloSize: user.carelloSize
         }));
 
     }
@@ -40,7 +42,15 @@ export class AuthServices {
             isAdmin: false,
             isLogged: false,
             userId: null,
+            carelloSize: 0
         });
+    }
+
+    setCarelloSize(carello: number) {
+        this.grant.update(grant => ({
+            ...grant,     // copia tutte le proprieta di grant
+            carelloSize: carello
+        }));
     }
 
     isAutentificated(): boolean {

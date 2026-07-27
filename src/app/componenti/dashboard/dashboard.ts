@@ -13,10 +13,12 @@ import { UtenteServices } from '../../services/utente-services';
 import { Registrazione } from '../../dialogs/registrazione/registrazione';
 import { ChangePassword } from '../../dialogs/change-password/change-password';
 import { AutentificazioneServices } from '../../security/autentificazione-services';
+import { MatBadgeModule } from '@angular/material/badge';
+
 @Component({
   selector: 'app-dashboard',
   imports: [MatSidenavModule, MatListModule, RouterLink, RouterOutlet, RouterLinkActive, MatIconModule,
-    MatButtonModule, MatToolbarModule, MatMenuModule
+    MatButtonModule, MatToolbarModule, MatMenuModule, MatBadgeModule
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',

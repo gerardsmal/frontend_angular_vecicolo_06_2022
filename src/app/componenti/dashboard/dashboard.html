@@ -1,5 +1,5 @@
 <mat-toolbar>
-  @if (auth.grant().isLogged){
+    @if (auth.grant().isLogged){
     <button matIconButton [matMenuTriggerFor]="menu" class="example-icon"
         aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
@@ -15,23 +15,38 @@
         </button>
     </mat-menu>
     }
-   <span>Veicoli market</span>
+    <span>Veicoli market</span>
 
     @if (auth.grant().userId) {
 
     <div class="user-info">
         <span class="welcome">Ciao {{ auth.grant().userId }}</span>
-    </div>    
+    </div>
     }
 
- 
     <span class="example-spacer"></span>
-       <button matIconButton class="example-icon" aria-label="Example icon-button with share icon" 
-       (click)="login()">
+    <button mat-icon-button class="example-icon" aria-label="Home page" matTooltip="Home Page"
+        [routerLink]="['/dash','home']">
+        <mat-icon>home</mat-icon>
+    </button>
+
+
+    @if (auth.grant().isLogged){
+        @if (auth.grant().carelloSize >0){
+        <div class="icon-with-label" matTooltip="Gestione del Carrello" [routerLink]="['/dash','carello']">
+            <button mat-icon-button aria-label="Carrello" matBadge={{auth.grant().carelloSize}}>
+                <img src="cart.svg" class="menu-icon-img" />
+            </button>
+        </div>
+        }    
+    }
+
+
+    <button matIconButton class="example-icon" aria-label="Example icon-button with share icon" (click)="login()">
         <mat-icon>login</mat-icon>
     </button>
 
- 
+
     <button matIconButton class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
         <mat-icon>logout</mat-icon>
     </button>
@@ -43,7 +58,7 @@
             <mat-list-item role="listitem" routerLink="home" [routerLinkActive]="'active'">
                 Home</mat-list-item>
 
-                @if (auth.grant().isAdmin){
+            @if (auth.grant().isAdmin){
             <mat-list-item role="listitem" routerLink="utente" [routerLinkActive]="'active'">
                 Gestione utente</mat-list-item>
             <mat-list-item role="listitem" routerLink="veicoli" [routerLinkActive]="'active'">

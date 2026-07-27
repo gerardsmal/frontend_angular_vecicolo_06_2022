@@ -1,0 +1,40 @@
+<mat-dialog-content class="dialog-container">
+    <button mat-icon-button mat-dialog-close class="dialog-close-btn">
+        <mat-icon>close</mat-icon>
+    </button>
+    <mat-card class="product-card">
+        <div class="mat-mdc-card-header-text">
+        <mat-card-header class="header-center">
+            <mat-card-title>{{veicolo.modello}}</mat-card-title>
+            <mat-card-subtitle>{{veicolo.marca.nome}}</mat-card-subtitle>
+            
+        </mat-card-header>
+</div>
+        <div class="image-container">
+            @if (veicolo.image) {
+            <img mat-card-image [src]="veicolo.image" alt="Cover">
+            } @else {
+            <img src="no-image.png" alt="No image">
+            }
+        </div>
+
+        <mat-card-content>
+            <span><strong>Cilindrata. </strong>{{veicolo.moto.cc}}</span>
+            <span><strong>Targa </strong>{{veicolo.moto.targa}}</span>
+            <span><strong>Tipo alimentazione </strong>{{veicolo.tipoAlimentazione.nome}}</span>
+            <span><strong>Categoria </strong>{{veicolo.categoria.nome}}</span>
+            <span><strong>Colore </strong>{{veicolo.colore.nome}}</span>
+            <span><strong>Anno di produzione </strong>{{veicolo.annoProduzione}}</span>
+            <span><strong>Prezzo </strong>{{veicolo.prezzo | currency:'EUR'}}</span>
+
+            <div class="msg-error full-row">
+                <span style="color:red">{{ msg() }}</span>
+            </div>
+
+        </mat-card-content>
+
+        <mat-card-actions >
+            <button matButton (click)="aggiungiCarello()">Aggiungi a carrello</button>
+        </mat-card-actions>
+    </mat-card>
+</mat-dialog-content>
