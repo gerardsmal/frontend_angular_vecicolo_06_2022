@@ -7,7 +7,8 @@
         <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
             <mat-form-field appearance="fill">
                 <mat-label>User Name</mat-label>
-                <input matInput type="text" name="userName" placeholder="introdurre username" ngModel required>
+                <input matInput type="text" name="userName" placeholder="introdurre username"  
+                    [(ngModel)]="userName" required>
             </mat-form-field>
 
             <mat-form-field appearance="fill">

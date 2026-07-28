@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+mat-dialog-content {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 80%;
+  max-width: 1000px;
+  margin: 0 auto; 
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.button-group {
+  grid-column: span 3; /* 👈 pulsante centrato su tutta la riga */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+.msg-error {
+  grid-column: 1 / -1; 
+  color: red;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.btn-danger:hover {
+  background-color: #b71c1c;
+  color: white;
+}
+.dialog-close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #555;
+}

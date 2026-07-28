@@ -32,22 +32,35 @@ export class UtenteServices {
         return this.http.post(this.getBaseUrl() + "public/create", body)
             .pipe(tap(() => this.list()));
     }
-    update(body: {}) {
-        return this.http.patch(this.getBaseUrl() + "user/update", body)
+    updateAdmin(body: {}) {
+        console.log("execute updateAdmin")
+        return this.http.patch(this.getBaseUrl() + "admin/updateAdmin", body)
             .pipe(tap(() => this.list()));
     }
-   updateProfile(body: {}) {
+    updateProfile(body: {}) {
         return this.http.patch(this.getBaseUrl() + "user/update", body);
     }
 
+    delete(id: number) {
+        return this.http.delete(this.getBaseUrl() + "admin/delete/" + id)
+            .pipe(tap(() => this.list()));
+    }
+
     findByUserName(id?: string) {
-        
-        //const params = new HttpParams().set("userName", id);
-        //return this.http.get(this.getBaseUrl() + "user/getById", { params });
         return this.http.get(this.getBaseUrl() + "user/getById");
     }
+
     changePwd(body: {}) {
         return this.http.put(this.getBaseUrl() + "user/changePwd", body);
+    }
+
+    sendResetPassword(userName: any) {
+        let params = new HttpParams().set("userName", userName)
+        return this.http.get(this.getBaseUrl() + "public/sendResetPassword", { params })
+    }
+    
+    resetPassword(body: {}) {
+        return this.http.patch(this.getBaseUrl() + "public/resetPassword", body);
     }
 
 }

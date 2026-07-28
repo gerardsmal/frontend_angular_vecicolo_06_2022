@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { UtilitiesServices } from '../../services/utilities-services';
 import { Registrazione } from '../registrazione/registrazione';
 import { MeDTO } from '../../models/dto';
+import { UtenteServices } from '../../services/utente-services';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -28,10 +30,12 @@ export class Login {
 
   constructor(
     private account: AutentificazioneServices,
+    private utente:UtenteServices,
     private auth: AuthServices,
     private routing: Router,
     private util: UtilitiesServices,
-    private dialogRef: MatDialogRef<Login>
+    private dialogRef: MatDialogRef<Login>,
+    private snackBar : MatSnackBar
   ) { }
 
   onSubmit(signin: NgForm) {
@@ -74,5 +78,33 @@ export class Login {
 
   }
 
-  onResendChange(e: MatCheckboxChange) { }
+  onResendChange(e: MatCheckboxChange) {
+    if (e.checked) {
+      if (!this.userName?.trim()) {
+        this.msg.set("Inserire lo username.");
+        e.source.checked = false
+        return;
+      }
+      
+      this.utente.sendResetPassword(this.userName)
+        .subscribe({
+          next:((r:any) => {
+            e.source.checked = false;
+            this.dialogRef.close(false);
+             this.snackBar.open('Mail inviato per il reset password', 'Chiudi',
+                    {
+                        duration: 3000,
+                        panelClass: ['center-snackbar']
+                    }
+                );
+          }),
+          error:((r:any) => {
+            console.log("error:" + r.error.msg)
+          })
+        })
+          }
+
+  }
+
+
 }

@@ -1,0 +1,93 @@
+@if (mod == 'U'){
+<h2 mat-dialog-title>Detaglio {{account.nome}} {{account.cognome}}</h2>
+} @else {
+<h2 mat-dialog-title>Creazione nuovo utente</h2>
+}
+<button mat-icon-button mat-dialog-close class="dialog-close-btn">
+    <mat-icon>close</mat-icon>
+  </button>
+
+<mat-dialog-content>
+
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="form-grid">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput type="text" name="nome" formControlName="nome">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Cognome</mat-label>
+      <input matInput type="text" name="cognome" formControlName="cognome">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" name="email" formControlName="email">
+    </mat-form-field>
+
+    <mat-radio-group aria-label="Sesso" name="sesso" formControlName="sesso" class="radio-group">
+      <mat-radio-button value="M">Maschio</mat-radio-button>
+      <mat-radio-button value="F">Femmina</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Telefono</mat-label>
+      <input matInput type="text" name="telefono" formControlName="telefono">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Via</mat-label>
+      <input matInput type="text" name="via" formControlName="via">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Comune</mat-label>
+      <input matInput type="text" name="comune" formControlName="comune" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Cap</mat-label>
+      <input matInput type="number" name="cap" formControlName="cap" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>UserName</mat-label>
+      @if (mod == 'U'){
+        <input matInput type="text" name="userName" formControlName="userName" required readonly>
+      } @else {
+        <input matInput type="text" name="userName" formControlName="userName" required>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" name="password" formControlName="password">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Retype Password</mat-label>
+      <input matInput type="password" name="passwordControl" formControlName="passwordControl">
+    </mat-form-field>
+
+    <mat-radio-group aria-label="Role" name="role" formControlName="role" class="radio-group">
+      <mat-radio-button value="ADMIN">Adminitrator</mat-radio-button>
+      <mat-radio-button value="USER">Utente</mat-radio-button>
+    </mat-radio-group>
+
+ 
+    <div class="msg-error">
+      <span style="color:red">{{ msg() }}</span>
+    </div>
+    <div class="button-group">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!updateForm.valid"
+        matTooltip="Salvare le modifiche">
+        Registrazione</button>
+      @if (mod == 'U'){
+      <button mat-raised-button type="button" matTooltip="Cancellazione utente" (click)="remove()"
+        class="btn-danger">
+        cancelazione</button>
+
+      }
+    </div>
+  </form>
+</mat-dialog-content>
