@@ -25,7 +25,6 @@ export class ResetPassword implements OnInit {
   ngOnInit(): void {
     this.msg.set("");
     this.id = this.route.snapshot.paramMap.get("id");
-    console.log("id:" + this.id);
   }
 
   onSubmit(updatePwd: NgForm) {

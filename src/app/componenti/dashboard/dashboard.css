@@ -25,6 +25,7 @@
   font-weight: 500;
 }
 .logo {
-    width: 100px;
+    width: 110px;
+    max-width: 100%;
     height: auto;
 }
